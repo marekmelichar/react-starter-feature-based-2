@@ -1,26 +1,20 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import ReactDOM from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { SnackbarProvider, useSnackbar } from 'notistack'
-import {
-  CssBaseline,
-  IconButton,
-  StyledEngineProvider,
-  ThemeProvider,
-} from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
-import { App } from '@/App'
-import '@/i18n'
-import store from './store'
-import theme from './theme'
+import React from 'react';
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
+import { CssBaseline, IconButton, StyledEngineProvider, ThemeProvider } from '@mui/material';
+import { App } from './App';
+import '@/i18n';
+import store from './store';
+import theme from './theme';
 
 declare module '@mui/material/styles' {
   interface Palette {
     accepted: {
-      main: string
-      light: string
-    }
+      main: string;
+      light: string;
+    };
   }
 }
 
@@ -28,27 +22,23 @@ declare module '@mui/material/styles' {
 declare global {
   // tslint:disable-next-line
   interface Window {
-    BASE_API_URL: string
+    BASE_API_URL: string;
   }
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
-function SnackbarCloseButton({ snackbarKey }: { snackbarKey: any }) {
-  const { closeSnackbar } = useSnackbar()
+function SnackbarCloseButton({ snackbarKey }: { snackbarKey: SnackbarKey }) {
+  const { closeSnackbar } = useSnackbar();
 
-  return (
-    <IconButton onClick={() => closeSnackbar(snackbarKey)}>
-      <CloseIcon sx={{ color: theme.palette.common.white }} />
-    </IconButton>
-  )
+  return <IconButton onClick={() => closeSnackbar(snackbarKey)}></IconButton>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       {/* Suspense added as requirement of react-i18next useTranslation hook */}
-      <React.Suspense fallback='Loading...'>
+      <React.Suspense fallback="Loading...">
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -57,9 +47,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <SnackbarProvider
                 maxSnack={3}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                action={(snackbarKey) => (
-                  <SnackbarCloseButton snackbarKey={snackbarKey} />
-                )}
+                action={(snackbarKey) => <SnackbarCloseButton snackbarKey={snackbarKey} />}
               >
                 <App />
               </SnackbarProvider>
@@ -68,5 +56,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </StyledEngineProvider>
       </React.Suspense>
     </QueryClientProvider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);

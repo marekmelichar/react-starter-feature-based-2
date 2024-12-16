@@ -23,7 +23,7 @@
     /* Aliases for imports */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*", "./dist/*", ""]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],

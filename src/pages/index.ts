@@ -1,4 +1,2 @@
-export * from './HomePage'
-export * from './NotFoundPage'
-export * from './PostsPage'
-export * from './PostPage'
+export * from './IntroPage';
+export * from './NotFoundPage';
